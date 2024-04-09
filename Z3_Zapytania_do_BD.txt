@@ -1,0 +1,59 @@
+--1
+--Wartość ekwipunku postaci o danym numerze pc_id
+
+select sum(wartosc) wartosc_pc_1 from 
+(select (items.value * inventories.quantity) wartosc, inventories.item_id  
+from items inner join inventories on items.item_id = inventories.item_id 
+where inventories.pc_id = 1);
+
+
+--2
+--Obliczenie poziomu postaci i stworzenie widoku - 1000 exp points -> 1 lvl, wykorzystanie funkcji floor
+--ponieważ nie chcemy zaokrąglania poziomów, liczą się pełne wartości.
+
+create view poziomy_postaci as
+select nickname, FLOOR(exp_points / 1000) lvl from pc;
+
+--3
+--Umiejętności jakimi dysponuje postać, wykorzystanie widoku poziomy_postaci
+select BB.nickname, BB.class, BB.lvl, AA.skill, AA.lvl wymagany_lvl from
+(select pc.nickname, poziomy_postaci.lvl, pc.class from poziomy_postaci inner join
+pc on poziomy_postaci.nickname = pc.nickname) BB
+inner join
+(select skills.name skill, skills.level_req lvl, classes.name class 
+from skills inner join classes on skills.class = classes.name) AA
+on BB.class = AA.class
+where BB.lvl >= AA.lvl;
+--Gracz Buk zna tylko umiejętność Kopniak z półobrotu, ponieważ spełnia wymagania,
+--ale nie spełnia wymagań na używanie 2 umiejętności, która wymaga 120 poziomu postaci.
+--Analogicznie postać o nazwie HeHE21, ma za niski poziom na poznanie 2 umiejętnośći
+--W wyniku nie pojawił się Buk00 oraz POO90, ponieważ mają zbyt niskie poziomy, aby
+--znać jakąkolwiek umiejętność.
+
+--4
+--Obliczenie aktualnych statystyk postaci sumując bonusy klasowe oraz rasowe oraz poziom
+select 
+pc.nickname, poziomy_postaci.lvl,
+(races.mod_str + classes.mod_str + pc.str) str,
+(races.mod_int + classes.mod_int + pc.int) int,
+(races.mod_agi + classes.mod_agi + pc.agi) agi,
+(races.mod_vit + classes.mod_vit + pc.vit) vit
+from pc
+inner join races on races.name = pc.race
+inner join classes on classes.name = pc.class
+inner join poziomy_postaci on pc.nickname = poziomy_postaci.nickname; 
+
+--5
+--Wypisanie domów, które aktualnie nie mają właściciela, teoretyczna możliwość wejścia w posiadanie
+select houses.house_id, houses.owner_type rodzaj_wlasc 
+from houses
+minus
+(select houses.house_id, houses.owner_type rodzaj_wlasc 
+from houses 
+inner join pc on houses.house_id = pc.house_id
+union
+select houses.house_id, houses.owner_type rodzaj_wlasc 
+from houses 
+inner join guilds on guilds.house_id = houses.house_id);
+
+		

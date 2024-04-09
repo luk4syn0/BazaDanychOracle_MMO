@@ -1,0 +1,230 @@
+-- Skrypt wypełniający bazę danych
+--
+-- LOCATIONS
+INSERT INTO LOCATIONS
+		(location_id,name,pos_x,pos_y,pos_z)
+	VALUES
+		(10, 'Ben Gin', 234.74, 34.32, 451.21);
+		
+INSERT INTO LOCATIONS
+		(location_id,name,pos_x,pos_y,pos_z)
+	VALUES
+		(74, 'Góry blade', 129.08, 690.90, -239.92);
+		
+INSERT INTO LOCATIONS
+		(location_id,name,pos_x,pos_y,pos_z)
+	VALUES
+		(15, 'Wybrzeże kości', 34.94, 5.54, 744.31);
+--
+--HOUSES
+INSERT INTO HOUSES
+		(house_id,name,building_type,owner_type,value,location_id)
+	VALUES
+		(210,'Lepianka','Podstawowy dom','PC',1000.00,10);
+		
+INSERT INTO HOUSES
+		(house_id,building_type,owner_type,value,location_id)
+	VALUES
+		(212,'Posiadłość','PC',390058.99,10);
+		
+INSERT INTO HOUSES
+		(house_id,name,building_type,owner_type,value,location_id)
+	VALUES
+		(216,'Wolfenstein','Zamek','GUILD',912000.78,74);
+INSERT INTO HOUSES
+		(house_id,building_type,owner_type,value,location_id)
+	VALUES
+		(217,'Podstawowy dom','GUILD',2890.34,10);				
+--
+--GUILDS
+INSERT INTO GUILDS
+		(guild_name,creation_date,rank,house_id)
+	VALUES
+		('Baranki',TO_DATE('2003/05/03 21:02:44', 'yyyy/mm/dd hh24:mi:ss'),1,216);
+INSERT INTO GUILDS
+		(guild_name,creation_date,rank,house_id)
+	VALUES
+		('GucioGildia',TO_DATE('2004/06/12 22:22:14', 'yyyy/mm/dd hh24:mi:ss'),9991,217);
+--
+--ITEMS
+INSERT INTO ITEMS
+		(item_id,name,weight,type,level_req,atk,value)
+	VALUES
+		(116,'Drewniana pałka',3.25,'Broń',3,10,2.02);
+INSERT INTO ITEMS
+		(item_id,name,weight,type,level_req,def,value)
+	VALUES
+		(26,'Drewniana tarcza',5.50,'Tarcza',4,10,3.11);
+INSERT INTO ITEMS
+		(item_id,name,weight,type,value)
+	VALUES
+		(11,'Onyks',0.25,'Kosztowność',30);
+INSERT INTO ITEMS
+		(item_id,name,weight,type,value)
+	VALUES
+		(16,'Szmaragd',0.25,'Kosztowność',50);
+INSERT INTO ITEMS
+		(item_id,name,weight,type,level_req,def,value)
+	VALUES
+		(100,'Kolczuga',20,'Pancerz',30,100,550.99);
+		
+INSERT INTO ITEMS
+		(item_id,name,weight,type,level_req,atk,value)
+	VALUES
+		(150,'Miecz Giganta',40.25,'Broń',100,300,500.42);
+--
+--CLASSES
+INSERT INTO CLASSES
+		(name,mod_str,mod_int,mod_agi,mod_vit)
+	VALUES
+		('Wojownik',100,0,50,200);
+		
+INSERT INTO CLASSES
+		(name,mod_str,mod_int,mod_agi,mod_vit)
+	VALUES
+		('Mag',10,200,10,25);
+		
+INSERT INTO CLASSES
+		(name,mod_str,mod_int,mod_agi,mod_vit)
+	VALUES
+		('Łotr',25,25,200,25);
+		
+
+--
+--SKILLS
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Magiczny kamień','Fizyczne',7.78,12,15.00,0,'Mag');
+
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Grzmot Starego Bóstwa','Elektryczność',60.25,100,300.00,100.00,'Mag');
+
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Kopniak z półobrotu','Fizyczne',23.00,15,0,10.00,'Wojownik');
+
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Rzeź niewiniątek','Fizyczne',80,120,0,500.00,'Wojownik');		
+
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Sztylet wichru','Fizyczne',10,10,0,5.00,'Łotr');
+		
+INSERT INTO SKILLS
+		(name,element_type,cooldown,level_req,mana_cost,stamina_cost,class)
+	VALUES
+		('Tornado sztyletów','Fizyczne',45.90,90,150,200,'Łotr');		
+		
+--
+--RACES
+INSERT INTO RACES
+		(name,mod_str,mod_int,mod_agi,mod_vit,is_playable)
+	VALUES
+		('Człowiek',10,10,10,25,1);
+		
+INSERT INTO RACES
+		(name,mod_str,mod_int,mod_agi,mod_vit,is_playable)
+	VALUES
+		('Dunmer',10,25,10,10,1);
+		
+INSERT INTO RACES
+		(name,mod_str,mod_int,mod_agi,mod_vit,is_playable)
+	VALUES
+		('Reptilianin',10,10,25,10,1);
+		
+INSERT INTO RACES
+		(name,mod_str,mod_int,mod_agi,mod_vit,is_playable)
+	VALUES
+		('Wysoki Demon',99,99,99,99,0);
+		
+INSERT INTO RACES
+		(name,mod_str,mod_int,mod_agi,mod_vit,is_playable)
+	VALUES
+		('Owca',1,1,1,1,0);
+
+
+--
+--NPC
+INSERT INTO NPC
+		(npc_id,name,attitude,exp_value,str,int,agi,vit,location_id,race)
+	VALUES
+		(1,'Betty','Neutral',5,1,1,1,1,10,'Owca');
+
+INSERT INTO NPC
+		(npc_id,name,attitude,exp_value,str,int,agi,vit,location_id,race)
+	VALUES
+		(2,'Belzebub','Hostile',2000,1500,1200,1200,2000,74,'Wysoki Demon');
+
+INSERT INTO NPC
+		(npc_id,name,attitude,exp_value,str,int,agi,vit,location_id,race)
+	VALUES
+		(3,'Paweł Kowal','Friendly',10,1,1,1,1,10,'Człowiek');
+
+INSERT INTO NPC
+		(npc_id,name,attitude,exp_value,str,int,agi,vit,location_id,race)
+	VALUES
+		(4,'Andrzej Kanibal','Friendly',10,1,1,1,1,15,'Człowiek');
+
+INSERT INTO NPC
+		(npc_id,name,attitude,exp_value,str,int,agi,vit,location_id,race)
+	VALUES
+		(5,'Ryszard Pej','Friendly',10,1,1,1,1,10,'Reptilianin');
+--100000 - 100lvl
+--PC
+INSERT INTO PC
+		(pc_id,nickname,gender,exp_points,str,int,agi,vit,class,race,house_id,guild)
+	VALUES
+		(1,'Buk','Mężczyzna',100000.00,1000,0,500,1630,'Wojownik','Człowiek',212,'Baranki');
+
+INSERT INTO PC
+		(pc_id,nickname,gender,exp_points,str,int,agi,vit,class,race,guild)
+	VALUES
+		(4,'Buk00','Mężczyzna',1000.00,10,10,10,10,'Wojownik','Człowiek','Baranki');
+
+
+INSERT INTO PC
+		(pc_id,nickname,gender,exp_points,str,int,agi,vit,class,race)
+	VALUES
+		(2,'HeHE21','Kobieta',50000.00,20,700,150,599,'Mag','Dunmer');
+
+INSERT INTO PC
+		(pc_id,nickname,gender,exp_points,str,int,agi,vit,class,race,guild)
+	VALUES
+		(3,'POO90','Mężczyzna',8000.00,20,10,100,20,'Łotr','Człowiek','GucioGildia');
+
+--
+--INVENTORIES
+
+INSERT INTO INVENTORIES
+		(pc_id,item_id,quantity)
+	VALUES
+		(1, 16, 90);
+		
+INSERT INTO INVENTORIES
+		(pc_id,item_id,quantity)
+	VALUES
+		(1, 150, 1);
+		
+INSERT INTO INVENTORIES
+		(pc_id,item_id,quantity)
+	VALUES
+		(1, 100, 2);
+		
+INSERT INTO INVENTORIES
+		(pc_id,item_id,quantity)
+	VALUES
+		(1, 26, 1);
+		
+INSERT INTO INVENTORIES
+		(pc_id,item_id,quantity)
+	VALUES
+		(2, 16, 2);
+
+		
